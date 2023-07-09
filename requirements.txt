@@ -1,0 +1,4 @@
+bluerobotics-ping
+loguru
+aiohttp
+pydantic
