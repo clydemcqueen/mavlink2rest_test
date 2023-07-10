@@ -15,7 +15,7 @@ Run mavlink2rest:
 
 [Handy swagger API](http://127.0.0.1:6040/docs/index.html?url=/docs.json#/default/get_helper_mavlink)
 
-I can use curl to send this message:
+Test: use curl to send a COMMAND_LONG message:
 ~~~
 curl --verbose http://127.0.0.1:6040/mavlink -H "accept: application/json" --data \
 '{
@@ -41,7 +41,7 @@ curl --verbose http://127.0.0.1:6040/mavlink -H "accept: application/json" --dat
 }'
 ~~~
 
-But this message gives the 404 "Failed to parse message, not a valid MAVLinkMessage":
+Send a DISTANCE_SENSOR message:
 ~~~
 curl --verbose http://127.0.0.1:6040/mavlink -H "accept: application/json" --data \
 '{
@@ -57,7 +57,7 @@ curl --verbose http://127.0.0.1:6040/mavlink -H "accept: application/json" --dat
         "max_distance": 5000,
         "current_distance": 33,
         "mavtype": {"type": "MAV_DISTANCE_SENSOR_ULTRASOUND"},
-        "id": 444,
+        "id": 1,
         "orientation": {"type": "MAV_SENSOR_ROTATION_PITCH_270"},
         "covariance": 255,
         "horizontal_fov": 0.52,
@@ -68,10 +68,8 @@ curl --verbose http://127.0.0.1:6040/mavlink -H "accept: application/json" --dat
 }'
 ~~~
 
-Similarly, [main.py](main.py) produces this result:
+[main.py](main.py) produces this result:
 ~~~
-2023-07-09 14:34:18.710 | INFO     | ping1d_mavlink:send_distance_data:63 - sending 333 (0)
-2023-07-09 14:34:18.716 | WARNING  | commonwealth.mavlink_comm.MavlinkComm:send_mavlink_message:143 - Failed to parse message, not a valid MAVLinkMessage.
-Received status code of 404.
+2023-07-09 17:33:22.196 | INFO     | ping1d_mavlink:send_distance_data:63 - sending 333 (0)
 ...
 ~~~

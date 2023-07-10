@@ -12,7 +12,7 @@ def main():
 
     while True:
         try:
-            asyncio.run(mavlink_driver.send_distance_data(333, 444, 0))
+            asyncio.run(mavlink_driver.send_distance_data(333, 1, 0))
         except MavlinkMessageSendFail as e:
             print(e)
 
