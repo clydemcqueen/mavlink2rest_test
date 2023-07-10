@@ -1,5 +1,7 @@
 This is a test harness for tracking down https://github.com/bluerobotics/BlueOS-docker/issues/1740.
 
+> SOLVED! 2 bugs in pymavlink, and 1 bug in mavlink2rest
+
 This example does not use a mavlink router (e.g., mavlink-routerd), so you can only have 1 receiver: QGC or recv.py.
 
 Add these paths to the Python path:
