@@ -2,3 +2,4 @@ bluerobotics-ping
 loguru
 aiohttp
 pydantic
+pymavlink

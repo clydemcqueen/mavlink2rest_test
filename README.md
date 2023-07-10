@@ -5,12 +5,13 @@ But I'm stuck just getting mavlink2rest to work from the command line.
 Add these paths to the Python path:
 * BlueOS-docker/core/services/ping
 * BlueOS-docker/core/libs/commonwealth
+* ardusub_log_tools
 
 Download the latest mavlink2rest binary from https://github.com/mavlink/mavlink2rest
 
 Run mavlink2rest:
 ~~~
-./mavlink2rest-x86_64-unknown-linux-musl --verbose --system-id 255 --component-id 0 --connect udpin:0.0.0.0:14550 --server 127.0.0.1:6040
+./mavlink2rest-x86_64-unknown-linux-musl --verbose --system-id 255 --component-id 0 --connect udpout:127.0.0.1:14550 --server 127.0.0.1:6040
 ~~~
 
 [Handy swagger API](http://127.0.0.1:6040/docs/index.html?url=/docs.json#/default/get_helper_mavlink)
@@ -68,7 +69,7 @@ curl --verbose http://127.0.0.1:6040/mavlink -H "accept: application/json" --dat
 }'
 ~~~
 
-[main.py](main.py) produces this result:
+[send.py](send.py) produces this result:
 ~~~
 2023-07-09 17:33:22.196 | INFO     | ping1d_mavlink:send_distance_data:63 - sending 333 (0)
 ...
