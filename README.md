@@ -115,7 +115,8 @@ checksum                8D F5           62861
 signature               not there -- optional
 ~~~
 
-QGC prefixes a 64-bit timestamp in big-endian format just before the 0xFD:
+[QGC prefixes a 64-bit timestamp](https://github.com/mavlink/qgroundcontrol/blob/245f9f1f9c475a24b02271e0b1a7a150f601f80d/src/comm/MAVLinkProtocol.cc#L280)
+in big-endian format just before the 0xFD:
 ~~~
 Timestamp of this message:
 00 06 00 18 28 DD 1E B8     1688953625059000     
@@ -167,4 +168,12 @@ SIM_VEHICLE: "mavproxy.py" "--out" "127.0.0.1:14550" "--master" "tcp:127.0.0.1:5
 RiTW: Starting ArduSub : /home/clyde/ardupilot/build/sitl/bin/ardusub -S --model vectored_6dof --speedup 1 --slave 0 --defaults Tools/autotest/default_params/sub-6dof.parm --sim-address=127.0.0.1 -I0 --home 33.810313,-118.39386700000001,0.0,270.0
 Connect tcp:127.0.0.1:5760 source_system=255
 
+~~~
+
+I'm getting zeros at the end... is mavlink2rest sending 0s?
+~~~
+/home/clyde/venv/mavlink2rest_test/bin/python /home/clyde/projects/mavlink2rest_test/recv.py 
+msgbuf ::: fd 27 00 00 b8 01 c2 84 00 00 25 13 03 00 14 00 88 13 15 09 01 01 19 ff b8 1e 05 3f b8 1e 05 3f 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 56 1c ::: seq 184 sysid 1 compid 194 msgid DISTANCE_SENSOR crc 7254
+msgbuf ::: fd 27 00 00 ba 01 c2 84 00 00 25 13 03 00 14 00 88 13 15 09 01 01 19 ff b8 1e 05 3f b8 1e 05 3f 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 8b 0a ::: seq 186 sysid 1 compid 194 msgid DISTANCE_SENSOR crc 2699
+msgbuf ::: fd 27 00 00 bb 01 c2 84 00 00 25 13 03 00 14 00 88 13 15 09 01 01 19 ff b8 1e 05 3f b8 1e 05 3f 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ed 85 ::: seq 187 sysid 1 compid 194 msgid DISTANCE_SENSOR crc 34285
 ~~~

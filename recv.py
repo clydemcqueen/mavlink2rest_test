@@ -11,15 +11,25 @@ conn = mavutil.mavlink_connection('udpin:0.0.0.0:14550', source_system=254, sour
 num_distance_sensor_msgs = 0
 num_bad_data_msgs = 0
 
+
+def nice_bytes(buf: bytearray) -> str:
+    return buf.hex(' ')
+
+
 while True:
     msg = conn.recv_match(blocking=True)
+
+    msgid = msg.get_type()
+
+    if msgid == 'HEARTBEAT':
+        continue
 
     timestamp = getattr(msg, '_timestamp', 0.0)
     seq = msg.get_seq()
     sysid = msg.get_srcSystem()
     compid = msg.get_srcComponent()
-    msgid = msg.get_type()
-    data = msg.to_dict()
+    # data = msg.to_dict()
+    msgbuf = msg.get_msgbuf()
     crc = msg.get_crc()
 
     # crc_extra is per-message, defined by mavgen
@@ -27,4 +37,6 @@ while True:
     # https://mavlink.io/en/guide/serialization.html#crc_extra
     crc_extra = msg.crc_extra
 
-    print(f'time {timestamp} seq {seq} sysid {sysid} compid {compid} msgid {msgid} crc {crc} crc_extra {crc_extra} data {data}')
+    # print(f'time {timestamp} seq {seq} sysid {sysid} compid {compid} msgid {msgid} crc {crc} crc_extra {crc_extra} data {data}')
+
+    print(f'msgbuf ::: {nice_bytes(msgbuf)} ::: seq {seq} sysid {sysid} compid {compid} msgid {msgid} crc {crc}')
